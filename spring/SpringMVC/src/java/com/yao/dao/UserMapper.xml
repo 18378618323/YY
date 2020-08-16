@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.dao.UserMapper">
+    <resultMap id="userMap" type="User"/>
+    <select id="getAllUser" resultMap="userMap">
+        select *from user
+    </select>
+    <select id="queryUser" parameterType="User" resultMap="userMap">
+        select * from user
+        <where>
+            <if test="id != null and id!=“”">id=#{id}</if>
+            <if test="username != null and username!=“”">username=#{username}</if>
+            <if test="birthday != null and birthday!=“”">birthday=#{birthday}</if>
+            <if test="sex != null and sex!=“”">sex=#{sex}</if>
+            <if test="address != null and address!=“”">address=#{address}</if>
+        </where>
+    </select>
+</mapper>

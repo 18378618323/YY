@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.dao.ProductMapper">
+    <resultMap id="productMap" type="product"/>
+    <select id="getAllProduct" resultMap="productMap">
+        select *from product
+    </select>
+    <select id="queryProductById" parameterType="int" resultMap="productMap">
+        select *from product where id=#{id}
+    </select>
+    <update id="updateProduct" parameterType="product">
+        update product set name=#{name},price=#{price},detail=#{detail},pic=#{pic} where id=#{id}
+    </update>
+    <insert id="addProduct" parameterType="product">
+        insert into product (name,price,detail,pic,createtime) values (#{name},#{price},#{detail},#{pic},#{createtime})
+    </insert>
+
+    <select id="voQueryProduct" resultMap="productMap" parameterType="product">
+        select *from product
+        <where>
+            <if test="id!=null and id!=''">id=#{id}</if>
+            <if test="name!=null and name!=''">name=#{name}</if>
+            <if test="price!=null and price!=''">price=#{price}</if>
+            <if test="detail!=null and detail!=''">detail=#{detail}</if>
+            <if test="pic!=null and pic!=''">pic=#{pic}</if>
+            <if test="createtime!=null and createtime!=''">createtime=#{createtime}</if>
+        </where>
+    </select>
+</mapper>

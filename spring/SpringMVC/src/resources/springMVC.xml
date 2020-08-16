@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+<!--    &lt;!&ndash;处理器映射器&ndash;&gt;-->
+<!--    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
+<!--    &lt;!&ndash;处理器适配器&ndash;&gt;-->
+<!--    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>-->
+
+
+
+    <!--处理器视图解析器-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <context:component-scan base-package="com.yao.controller"/>
+
+    <!--将下面自定义号的转换器挂载-->
+    <mvc:annotation-driven conversion-service="conversionService2"/>
+    <mvc:default-servlet-handler/>
+
+    <!--处理静态资源配置-->
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+
+    <!--配置自定义的转换器-->
+    <bean name="conversionService2" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.yao.converter.MyConverter"/>
+                <!--还可以配置多个自定义转换器-->
+<!--                <bean class="com.yao.converter.MyConverter"/>-->
+<!--                <bean class="com.yao.converter.MyConverter"/>-->
+<!--                <bean class="com.yao.converter.MyConverter"/>-->
+            </set>
+
+        </property>
+    </bean>
+
+    <!--文件上传-->
+    <bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1204000"/>
+    </bean>
+
+    <!--配置自定义的springmvc全局异常类-->
+    <bean class="com.yao.HandlerExecptionResolver.MyHandlerExecptionResolver"/>
+
+    <!--配置自定义的拦截器-->
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/**"/>-->
+<!--            <bean class="com.yao.HandlerInterceptor.MyInterceptor"/>-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
+</beans>

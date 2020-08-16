@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--配置日志工厂-->
+<!--    <settings>-->
+<!--        &lt;!&ndash;java自带的标准日志&ndash;&gt;-->
+<!--        &lt;!&ndash;        <setting name="logImpl" value="STDOUT_LOGGING"/>&ndash;&gt;-->
+<!--        &lt;!&ndash;使用log4j日志要导入包，在Maven中要导入依赖&ndash;&gt;-->
+<!--        <setting name="logImpl" value="LOG4J"/>-->
+<!--        &lt;!&ndash;开启全局缓存&ndash;&gt;-->
+<!--        &lt;!&ndash;        <setting name="cacheEnabled" value="true"/>&ndash;&gt;-->
+<!--    </settings>-->
+
+    <typeAliases>
+        <package name="com.yao.pojo"/>
+    </typeAliases>
+    
+    <!--  环境配置-->
+<!--    <environments default="dev">&lt;!&ndash;运行时&ndash;&gt;-->
+<!--        <environment id="dev">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                <property name="url" value="jdbc:mysql://localhost:3306/mybatis-demo"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="1234"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+
+<!--    </environments>-->
+    <!--- mapping映射环境配置-->
+    <mappers>
+        <package name="com.yao.dao"/>
+    </mappers>
+</configuration>
